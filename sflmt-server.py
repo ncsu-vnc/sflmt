@@ -1,10 +1,10 @@
-from flask import Flask, request, render_template
+import http.server
+import socketserver
 
-app = Flask(__name__)
+PORT = 5000
 
-@app.route('/')
-def index():
-        return render_template('index.html')
+Handler = http.server.SimpleHTTPRequestHandler
 
-if __name__=="__main__":
-    app.run("0.0.0.0")
+with socketserver.TCPServer(("", PORT), Handler) as httpd:
+    print("serving at port", PORT)
+    httpd.serve_forever()

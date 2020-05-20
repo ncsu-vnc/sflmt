@@ -18,10 +18,11 @@ pip install -r requirements.txt
 python sflmt.py --images "path/to/images/*.jpg" --metadata "path/to/metadata/*.json"
 ```
 
-## start SFLMT Flask server
+## start SFLMT server
 
 ```bash
 python sflmt-server.py
+# You can access the tool via localhost:5000
 ```
 
 ## Acknowledgements
