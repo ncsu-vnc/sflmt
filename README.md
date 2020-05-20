@@ -15,15 +15,17 @@ pip install -r requirements.txt
 ## Process a folder of images for visualization
 
 ```bash
-python sflmt.py --images "path/to/images/*.jpg" --metadata "path/to/metadata/*.json"
+python sflmt.py --images "path/to/images/*.jpg"
+
+#python sflmt.py --images "path/to/images/*.jpg" --metadata "path/to/metadata/*.json"
 ```
 
 ## start SFLMT server
 
 ```bash
 python sflmt-server.py
-# sflmt-server.py -d <directory> -p <port>
-# default port 5000 
+# usage: sflmt-server.py -d <directory> -p <port>
+# default directory "./" port 5000
 ```
 
 ## Acknowledgements
