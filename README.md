@@ -22,7 +22,8 @@ python sflmt.py --images "path/to/images/*.jpg" --metadata "path/to/metadata/*.j
 
 ```bash
 python sflmt-server.py
-# You can access the tool via localhost:5000
+# sflmt-server.py -d <directory> -p <port>
+# default port 5000 
 ```
 
 ## Acknowledgements

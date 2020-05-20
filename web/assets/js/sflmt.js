@@ -2173,7 +2173,7 @@ Modal.prototype.showCells = function(cellIndices, cellIdx) {
   var image = new Image();
   image.id = 'selected-image';
   image.onload = function() {
-    showModal({image: image})
+    showModal({image: image});
     get(config.data.dir + '/metadata/file/' + filename + '.json', function(json) {
       showModal(Object.assign({}, json, {image: image}));
     });
@@ -2618,7 +2618,7 @@ function Welcome() {
 }
 
 Welcome.prototype.onButtonClick = function(e) {
-	
+
 	 this.startWorld();
 	/*
   if (e.target.className.indexOf('active') > -1) {
