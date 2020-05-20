@@ -81,7 +81,6 @@ config = {
   'plot_id': str(uuid.uuid1()),
 }
 
-
 ##
 # Entry
 ##
@@ -117,7 +116,6 @@ def copy_web_assets(**kwargs):
 # Images
 ##
 
-
 def filter_images(**kwargs):
   '''Main method for filtering images given user metadata (if provided)'''
   image_paths = []
@@ -143,6 +141,7 @@ def filter_images(**kwargs):
   if not kwargs.get('metadata', False):
     return [image_paths, []]
   # handle user metadata: retain only records with image and metadata
+  # edit metadata
   l = get_metadata_list(**kwargs)
   img_bn = set([clean_filename(i) for i in image_paths])
   meta_bn = set([clean_filename(i.get('filename', '')) for i in l])
