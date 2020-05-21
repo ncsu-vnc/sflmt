@@ -307,7 +307,7 @@ def get_manifest(**kwargs):
   point_sizes['min'] = 0
   point_sizes['grid'] = 1 / math.ceil(len(kwargs['image_paths'])**(1/2)) * 1.2
   point_sizes['max'] = point_sizes['grid']
-  point_sizes['scatter'] = point_sizes['grid'] * .25
+  point_sizes['scatter'] = point_sizes['grid'] * .333
   point_sizes['initial'] = point_sizes['scatter']
   #point_sizes['grid'] = 1 / math.ceil(len(kwargs['image_paths'])**(1/2))
   #point_sizes['max'] = point_sizes['grid'] * 1.2
