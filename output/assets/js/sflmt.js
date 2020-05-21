@@ -488,13 +488,12 @@ Cell.prototype.setBuffer = function(attr) {
 *   to be displayed
 *
 * elem: DOM element for the layout selector
-* jitterElem: DOM element for the jitter selector
 * selected: currently selected layout option
 * options: list of strings identifying valid layout options
 **/
 
 function Layout() {
-  this.jitterElem = null;
+
   this.selected = null;
   this.options = [];
 }
@@ -508,13 +507,10 @@ Layout.prototype.init = function(options) {
   this.options = options;
   this.selected = data.json.initial_layout || Object.keys(options)[0];
   this.elems = {
-    input: document.querySelector('#jitter-input'),
-    container: document.querySelector('#jitter-container'),
     icons: document.querySelector('#icons'),
   }
   this.addEventListeners();
   this.selectActiveIcon();
-  layout.showHideJitter();
 }
 
 Layout.prototype.selectActiveIcon = function() {
@@ -537,19 +533,6 @@ Layout.prototype.addEventListeners = function() {
     if (!e.target || !e.target.id || e.target.id == 'icons') return;
     this.set(e.target.id.replace('layout-', ''), true);
   }.bind(this));
-  // allow clicks on jitter container to update jitter state
-  this.elems.container.addEventListener('click', function(e) {
-    if (e.target.tagName != 'INPUT') {
-      if (this.elems.input.checked) {
-        this.elems.input.checked = false;
-        this.elems.container.classList.remove('visible');
-      } else {
-        this.elems.input.checked = true;
-        this.elems.container.classList.add('visible');
-      }
-    }
-    this.set(this.selected, false);
-  }.bind(this));
 }
 
 // Transition to a new layout; layout must be an attr on Cell.layouts
@@ -570,10 +553,8 @@ Layout.prototype.set = function(layout, enableDelay) {
   this.setText();
   // zoom the user out if they're zoomed in
   var delay = this.recenterCamera(enableDelay);
-  // enable the jitter button if this layout has a jittered option
-  var jitter = this.showHideJitter();
   // determine the path to the json to display
-  var layoutType = jitter ? 'jittered' : 'layout'
+  var layoutType = 'layout'
   // begin the new layout transition
   setTimeout(function() {
     get(getPath(data.layouts[layout][layoutType]), function(pos) {
@@ -622,17 +603,6 @@ Layout.prototype.setPointScalar = function() {
   }
 }
 
-// show/hide the jitter and return a bool whether to jitter the new layout
-Layout.prototype.showHideJitter = function() {
-  var jitterable = 'jittered' in data.layouts[this.selected];
-  jitterable
-    ? world.state.transitioning
-      ? this.elems.container.classList.add('visible', 'disabled')
-      : this.elems.container.classList.add('visible')
-    : this.elems.container.classList.remove('visible')
-  return jitterable && this.elems.input.checked;
-}
-
 // add any required text to the scene
 Layout.prototype.setText = function() {
   if (!text.mesh) return;
@@ -647,8 +617,7 @@ Layout.prototype.setText = function() {
 
 // reset cell state, mesh buffers, and transition uniforms
 Layout.prototype.onTransitionComplete = function() {
-  // re-enable interactions with the jitter button
-  this.elems.container.classList.remove('disabled');
+
   // update the state and buffers for each cell
   data.cells.forEach(function(cell) {
     cell.x = cell.tx;
