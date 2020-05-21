@@ -72,7 +72,7 @@ config = {
   'atlas_size': 2048,
   'cell_size': 32,
   'lod_cell_height': 128,
-  'n_neighbors': 6,
+  'n_neighbors': 8,
   'min_distance': 0.001,
   'metric': 'correlation',
   'pointgrid_fill': 0.05,
