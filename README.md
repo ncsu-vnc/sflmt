@@ -23,7 +23,7 @@ python sflmt.py --images "path/to/images/*.jpg"
 ## start SFLMT server
 
 ```bash
-python sflmt-server.py
+python server.py
 # usage: sflmt-server.py -d <directory> -p <port>
 # default directory "./" port 5000
 ```
