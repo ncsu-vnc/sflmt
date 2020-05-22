@@ -46,6 +46,7 @@ function Config() {
   this.data = {
     dir: 'data',
     file: 'manifest.json',
+    buildingsLatLongFile: 'sample-images.json',
     gzipped: false,
   }
   this.size = {
@@ -201,6 +202,30 @@ Data.prototype.addCells = function(positions) {
   }
   // add the cells to a searchable LOD texture
   lod.indexCells();
+}
+
+/**
+ * BuildingsLatLong: Container for images and their corresponding latlong values 
+ **/
+
+function BuildingsLatLong() {
+  this.buildings = {}; 
+  this.previousLeafletMarkers = {};
+  this.load(); 
+}
+
+BuildingsLatLong.prototype.load = function() {
+  get(getPath(config.data.dir + '/' + config.data.buildingsLatLongFile),
+    function(json) {
+      this.json = json; 
+      for (var i=0; i<this.json.length; i++) {
+        this.buildings[this.json[i].filename] = this.json[i].latlong; 
+      }
+    }.bind(this),
+    function(err) {
+      console.warn('ERROR: could not load images.json')
+    }.bind(this)
+  )
 }
 
 /**
@@ -680,7 +705,7 @@ function World() {
 
 World.prototype.getScene = function() {
   var scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xbbbbbb); //fragment-shader(0x111111)
+  scene.background = new THREE.Color(0xdddddd); //fragment-shader(0x111111)
   return scene;
 }
 
@@ -1599,6 +1624,44 @@ Selection.prototype.getSelectedImageIndices = function() {
   return l;
 }
 
+// update markers on leaflet map based on selection box 
+Selection.prototype.updateLeafletMarkers = function() {
+    var imagesIndices = this.getSelectedImageIndices();
+    var newLeafletMarkers = {}; 
+
+    for (var i=0; i<imagesIndices.length; i++) {
+      // if already on the map, remove it from old group and add to new 
+      var imageIndex = imagesIndices[i];
+      var marker = buildingsLatLong.previousLeafletMarkers[imageIndex];
+      if (marker) {
+        newLeafletMarkers[imageIndex] = marker; 
+        delete buildingsLatLong.previousLeafletMarkers[imageIndex];
+      } else {
+        var fileName = data.json.images[imageIndex];
+        var latlong = buildingsLatLong.buildings[fileName];
+        var circleMarker = L.circleMarker(latlong, {
+          color: '#e60100', 
+          radius: 6, 
+          weight: 1, 
+          title: fileName
+        }).addTo(streetmap);
+
+        var imagePath = config.data.dir + "/thumbs/" + fileName; 
+        circleMarker.bindPopup("<img src=" + imagePath + " style= 'height: 100%; width: 100%; object-fit: contain'/>" + fileName);
+        newLeafletMarkers[imageIndex] = circleMarker; 
+      }
+    }
+
+    // the remaining markers in previousLeafletMarkers should be removed from map  
+    for (var key in buildingsLatLong.previousLeafletMarkers) {
+      var marker = buildingsLatLong.previousLeafletMarkers[key];
+      streetmap.removeLayer(marker);
+    }
+
+    buildingsLatLong.previousLeafletMarkers = newLeafletMarkers; 
+}
+
+
 // return a boolean indicating whether the user has selected any cells
 Selection.prototype.hasSelection = function() {
   return this.getSelectedImages().length > 0;
@@ -1641,6 +1704,7 @@ Selection.prototype.update = function() {
   }
   // if there are no selected cells, exit
   var selected = this.getSelectedImageIndices();
+  this.updateLeafletMarkers(); 
   var elem = document.querySelector('#n-images-selected');
   if (elem) elem.textContent = selected.length;
   if (!selected.length) {
@@ -1774,7 +1838,7 @@ Selection.prototype.downloadRows = function(rows) {
 
 function Picker() {
   this.scene = new THREE.Scene();
-  this.scene.background = new THREE.Color(0xbbbbbb);//THREE.Color(0x000000)
+  this.scene.background = new THREE.Color(0xdddddd);//THREE.Color(0x000000)
   this.mouseDown = new THREE.Vector2();
   this.tex = this.getTexture();
 }
@@ -2829,7 +2893,7 @@ function scale(arr) {
 var baseLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
-    id: 'mapbox.dark',
+    id: 'mapbox.light',
     accessToken: 'pk.eyJ1Ijoic3RodWFuZyIsImEiOiJjaml2eG01OTYyeWhvM3ZyZnkyMGFnb3BtIn0.SrOe7OxYc1nIC754KJJgtw'
 });
 
@@ -2849,6 +2913,8 @@ L.control.scale({
 L.control.zoom({
   position: 'topright'
 }).addTo(streetmap);
+
+var layerGroup = L.layerGroup().addTo(streetmap);
 
 /**
 * Main
@@ -2870,3 +2936,4 @@ var text = new Text();
 var dates = new Dates();
 var lod = new LOD();
 var data = new Data();
+var buildingsLatLong = new BuildingsLatLong();

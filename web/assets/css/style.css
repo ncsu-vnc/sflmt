@@ -91,7 +91,7 @@ select:disabled {
 #streetmap {
   height: 100%;
   width: 100%;
-  background-color: #171717;
+  background-color: #fff;
 }
 
 #streetmap-canvas-container {
@@ -101,7 +101,7 @@ select:disabled {
   height: 100%;
   width: 50%;
   overflow: hidden;
-  background: #000;
+  background: #fff;
   z-index: 1;
 }
 
