@@ -14,9 +14,10 @@ pip install -r requirements.txt
 ## Process a folder of images for visualization
 
 ```bash
-python sflmt.py --images "path/to/images/*.jpg"
 
-#python sflmt.py --images "path/to/images/*.jpg" --metadata "path/to/metadata/*.json"
+python sflmt.py --images "./sample-images/files/*.jpg" --latlong "./sample-images/sample-images-metadata.json"
+
+#python sflmt.py --images "path/to/images/*.jpg" --latlong "path/to/metadata/*.json"
 ```
 
 ## start SFLMT server

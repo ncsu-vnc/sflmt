@@ -65,6 +65,7 @@ NB: Keras Image class objects return image.size as w,h
 config = {
   'images': None,
   'metadata': None,
+  'latlong': None,
   'out_dir': 'output',
   'use_cache': True,
   'encoding': 'utf8',
@@ -98,18 +99,22 @@ def process_images(**kwargs):
 
 
 def copy_web_assets(**kwargs):
-  '''Copy the /web directory from the SFLMT source to the users cwd'''
-  src = join(dirname(realpath(__file__)), 'web')
-  dest = join(os.getcwd(), kwargs['out_dir'])
-  copy_tree(src, dest)
-  # write version numbers into output
-  for i in ['index.html', os.path.join('assets', 'js', 'sflmt.js')]:
-    path = os.path.join(dest, i)
-    with open(path, 'r') as f:
-      f = f.read().replace('VERSION_NUMBER', get_version())
-      with open(path, 'w') as out:
-        out.write(f)
-  if kwargs['copy_web_only']: sys.exit()
+
+    '''Copy the /web directory from the SFLMT source to the users cwd'''
+    src = join(dirname(realpath(__file__)), 'web')
+    dest = join(os.getcwd(), kwargs['out_dir'])
+    copy_tree(src, dest)
+    # write version numbers into output
+    for i in ['index.html', os.path.join('assets', 'js', 'sflmt.js')]:
+        path = os.path.join(dest, i)
+        with open(path, 'r') as f:
+            f = f.read().replace('VERSION_NUMBER', get_version())
+            with open(path, 'w') as out:
+                out.write(f)
+    if (config['latlong'] != None):
+        if not os.path.exists(str(config['out_dir']) + "/data/"): os.makedirs(str(config['out_dir']) + "/data/")
+        shutil.copyfile(config['latlong'], str(config['out_dir']) + "/data/imageslatlong.json")
+    if kwargs['copy_web_only']: sys.exit()
 
 
 ##
@@ -952,6 +957,7 @@ def parse():
   parser = argparse.ArgumentParser(description=description, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
   parser.add_argument('--images', type=str, default=config['images'], help='path to a glob of images to process', required=False)
   parser.add_argument('--metadata', type=str, default=config['metadata'], help='path to a csv or glob of JSON files with image metadata (see readme for format)', required=False)
+  parser.add_argument('--latlong', type=str, default=config['latlong'], help='path to a JSON file with image latlong metadata', required=False)
   parser.add_argument('--use_cache', type=bool, default=config['use_cache'], help='given inputs identical to prior inputs, load outputs from cache', required=False)
   parser.add_argument('--encoding', type=str, default=config['encoding'], help='the encoding of input metadata', required=False)
   parser.add_argument('--min_cluster_size', type=int, default=config['min_cluster_size'], help='the minimum number of images in a cluster', required=False)

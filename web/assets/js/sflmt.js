@@ -46,7 +46,7 @@ function Config() {
   this.data = {
     dir: 'data',
     file: 'manifest.json',
-    buildingsLatLongFile: 'sample-images.json',
+    imagesLatLongFile: 'imageslatlong.json',
     gzipped: false,
   }
   this.size = {
@@ -205,21 +205,21 @@ Data.prototype.addCells = function(positions) {
 }
 
 /**
- * BuildingsLatLong: Container for images and their corresponding latlong values 
+ * ImagesLatLong: Container for images and their corresponding latlong values
  **/
 
-function BuildingsLatLong() {
-  this.buildings = {}; 
+function ImagesLatLong() {
+  this.imageslatlong = {};
   this.previousLeafletMarkers = {};
-  this.load(); 
+  this.load();
 }
 
-BuildingsLatLong.prototype.load = function() {
-  get(getPath(config.data.dir + '/' + config.data.buildingsLatLongFile),
+ImagesLatLong.prototype.load = function() {
+  get(getPath(config.data.dir + '/' + config.data.imagesLatLongFile),
     function(json) {
-      this.json = json; 
+      this.json = json;
       for (var i=0; i<this.json.length; i++) {
-        this.buildings[this.json[i].filename] = this.json[i].latlong; 
+        this.imageslatlong[this.json[i].filename] = this.json[i].latlong;
       }
     }.bind(this),
     function(err) {
@@ -1288,15 +1288,17 @@ World.prototype.flyTo = function(obj) {
 
 // fly to the cell at index position `idx`
 World.prototype.flyToCellIdx = function(idx) {
-  var cell = data.cells[idx];
-  world.flyTo({
-    x: cell.x,
-    y: cell.y,
-    z: Math.min(
-      config.pickerMaxZ-0.0001,
-      cell.z + (this.getPointScale() / 100)
-    ),
-  })
+  if ((idx >= 0) && (idx < data.cells.length)){
+    var cell = data.cells[idx];
+    world.flyTo({
+      x: cell.x,
+      y: cell.y,
+      z: Math.min(
+        config.pickerMaxZ-0.0001,
+        cell.z + (this.getPointScale() / 100)
+      ),
+    })
+  }
 }
 
 // fly to the cell at index position `idx`
@@ -1624,41 +1626,41 @@ Selection.prototype.getSelectedImageIndices = function() {
   return l;
 }
 
-// update markers on leaflet map based on selection box 
+// update markers on leaflet map based on selection box
 Selection.prototype.updateLeafletMarkers = function() {
     var imagesIndices = this.getSelectedImageIndices();
-    var newLeafletMarkers = {}; 
+    var newLeafletMarkers = {};
 
     for (var i=0; i<imagesIndices.length; i++) {
-      // if already on the map, remove it from old group and add to new 
+      // if already on the map, remove it from old group and add to new
       var imageIndex = imagesIndices[i];
-      var marker = buildingsLatLong.previousLeafletMarkers[imageIndex];
+      var marker = ImagesLatLong.previousLeafletMarkers[imageIndex];
       if (marker) {
-        newLeafletMarkers[imageIndex] = marker; 
-        delete buildingsLatLong.previousLeafletMarkers[imageIndex];
+        newLeafletMarkers[imageIndex] = marker;
+        delete ImagesLatLong.previousLeafletMarkers[imageIndex];
       } else {
         var fileName = data.json.images[imageIndex];
-        var latlong = buildingsLatLong.buildings[fileName];
+        var latlong = ImagesLatLong.imageslatlong[fileName];
         var circleMarker = L.circleMarker(latlong, {
-          color: '#e60100', 
-          radius: 6, 
-          weight: 1, 
+          color: '#e60100',
+          radius: 6,
+          weight: 1,
           title: fileName
         }).addTo(streetmap);
 
-        var imagePath = config.data.dir + "/thumbs/" + fileName; 
+        var imagePath = config.data.dir + "/thumbs/" + fileName;
         circleMarker.bindPopup("<img src=" + imagePath + " style= 'height: 100%; width: 100%; object-fit: contain'/>" + fileName);
-        newLeafletMarkers[imageIndex] = circleMarker; 
+        newLeafletMarkers[imageIndex] = circleMarker;
       }
     }
 
-    // the remaining markers in previousLeafletMarkers should be removed from map  
-    for (var key in buildingsLatLong.previousLeafletMarkers) {
-      var marker = buildingsLatLong.previousLeafletMarkers[key];
+    // the remaining markers in previousLeafletMarkers should be removed from map
+    for (var key in ImagesLatLong.previousLeafletMarkers) {
+      var marker = ImagesLatLong.previousLeafletMarkers[key];
       streetmap.removeLayer(marker);
     }
 
-    buildingsLatLong.previousLeafletMarkers = newLeafletMarkers; 
+    ImagesLatLong.previousLeafletMarkers = newLeafletMarkers;
 }
 
 
@@ -1704,7 +1706,7 @@ Selection.prototype.update = function() {
   }
   // if there are no selected cells, exit
   var selected = this.getSelectedImageIndices();
-  this.updateLeafletMarkers(); 
+  this.updateLeafletMarkers();
   var elem = document.querySelector('#n-images-selected');
   if (elem) elem.textContent = selected.length;
   if (!selected.length) {
@@ -2936,4 +2938,4 @@ var text = new Text();
 var dates = new Dates();
 var lod = new LOD();
 var data = new Data();
-var buildingsLatLong = new BuildingsLatLong();
+var ImagesLatLong = new ImagesLatLong();
