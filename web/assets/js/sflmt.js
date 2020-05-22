@@ -680,7 +680,7 @@ function World() {
 
 World.prototype.getScene = function() {
   var scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x888888); //THREE.Color(0x111111)
+  scene.background = new THREE.Color(0xbbbbbb); //fragment-shader(0x111111)
   return scene;
 }
 
@@ -1114,7 +1114,7 @@ World.prototype.getShaderMaterial = function(obj) {
       },
       borderColor: {
         type: 'vec3',
-        value: new Float32Array([234/255, 183/255, 85/255]),
+        value: new Float32Array([230/255, 1/255, 0/255]),
       },
       delay: {
         type: 'f',
@@ -1774,7 +1774,7 @@ Selection.prototype.downloadRows = function(rows) {
 
 function Picker() {
   this.scene = new THREE.Scene();
-  this.scene.background = new THREE.Color(0x888888);//THREE.Color(0x000000)
+  this.scene.background = new THREE.Color(0xbbbbbb);//THREE.Color(0x000000)
   this.mouseDown = new THREE.Vector2();
   this.tex = this.getTexture();
 }
