@@ -1,4 +1,3 @@
-
 /**
 *
 * General structure of this viewer
@@ -125,6 +124,8 @@ Data.prototype.load = function() {
       }
     }.bind(this)
   )
+
+
 }
 
 Data.prototype.parseManifest = function(json) {
@@ -211,6 +212,9 @@ Data.prototype.addCells = function(positions) {
 function ImagesLatLong() {
   this.imageslatlong = {};
   this.previousLeafletMarkers = {};
+  //this.data = new Array();
+  this.data = new Array();
+  this.json = {};
   this.load();
 }
 
@@ -220,12 +224,18 @@ ImagesLatLong.prototype.load = function() {
       this.json = json;
       for (var i=0; i<this.json.length; i++) {
         this.imageslatlong[this.json[i].filename] = this.json[i].latlong;
+        position = {"latitude": this.json[i].latlong[0], "longitude": this.json[i].latlong[1]};
+        this.data.push(position);
       }
+      //set initial center of map based upon avg of latlongs of street images
+      var newCenter = averageGeolocation(this.data);
+      streetmap.setView(new L.LatLng(newCenter.latitude, newCenter.longitude), streetmap.getZoom());
     }.bind(this),
     function(err) {
       console.warn('ERROR: could not load images.json')
     }.bind(this)
   )
+
 }
 
 /**
@@ -705,7 +715,7 @@ function World() {
 
 World.prototype.getScene = function() {
   var scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xdddddd); //fragment-shader(0x111111)
+  scene.background = new THREE.Color(0xeeeeee); //fragment-shader(0x111111)
   return scene;
 }
 
@@ -1634,13 +1644,13 @@ Selection.prototype.updateLeafletMarkers = function() {
     for (var i=0; i<imagesIndices.length; i++) {
       // if already on the map, remove it from old group and add to new
       var imageIndex = imagesIndices[i];
-      var marker = ImagesLatLong.previousLeafletMarkers[imageIndex];
+      var marker = imagesLatLong.previousLeafletMarkers[imageIndex];
       if (marker) {
         newLeafletMarkers[imageIndex] = marker;
-        delete ImagesLatLong.previousLeafletMarkers[imageIndex];
+        delete imagesLatLong.previousLeafletMarkers[imageIndex];
       } else {
         var fileName = data.json.images[imageIndex];
-        var latlong = ImagesLatLong.imageslatlong[fileName];
+        var latlong = imagesLatLong.imageslatlong[fileName];
         var circleMarker = L.circleMarker(latlong, {
           color: '#e60100',
           radius: 6,
@@ -1655,12 +1665,12 @@ Selection.prototype.updateLeafletMarkers = function() {
     }
 
     // the remaining markers in previousLeafletMarkers should be removed from map
-    for (var key in ImagesLatLong.previousLeafletMarkers) {
-      var marker = ImagesLatLong.previousLeafletMarkers[key];
+    for (var key in imagesLatLong.previousLeafletMarkers) {
+      var marker = imagesLatLong.previousLeafletMarkers[key];
       streetmap.removeLayer(marker);
     }
 
-    ImagesLatLong.previousLeafletMarkers = newLeafletMarkers;
+    imagesLatLong.previousLeafletMarkers = newLeafletMarkers;
 }
 
 
@@ -1840,7 +1850,7 @@ Selection.prototype.downloadRows = function(rows) {
 
 function Picker() {
   this.scene = new THREE.Scene();
-  this.scene.background = new THREE.Color(0xdddddd);//THREE.Color(0x000000)
+  this.scene.background = new THREE.Color(0xeeeeee);//THREE.Color(0x000000)
   this.mouseDown = new THREE.Vector2();
   this.tex = this.getTexture();
 }
@@ -2899,9 +2909,13 @@ var baseLayer = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.pn
     accessToken: 'pk.eyJ1Ijoic3RodWFuZyIsImEiOiJjaml2eG01OTYyeWhvM3ZyZnkyMGFnb3BtIn0.SrOe7OxYc1nIC754KJJgtw'
 });
 
+/*
+imageslatlong
+*/
+
 if (document.getElementById('streetmap') !== null) {
     var streetmap = L.map('streetmap', {
-  center: new L.LatLng(35.7796, -78.6382), //raleigh
+  center: new L.LatLng(0, 0),
   zoomControl: false,
   zoom: 13,
   layers: [baseLayer]
@@ -2938,4 +2952,4 @@ var text = new Text();
 var dates = new Dates();
 var lod = new LOD();
 var data = new Data();
-var ImagesLatLong = new ImagesLatLong();
+var imagesLatLong = new ImagesLatLong();
