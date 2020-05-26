@@ -347,13 +347,17 @@
     }
     </script>
 
+
+
     <!-- Header -->
+
     <header id='header' class='no-highlight'>
       <a href='https://www.visualnarrative.ncsu.edu/' target='_blank'>
         <img id='logo' src='assets/images/up-logo.png' alt='UP logo' />
       </a>
       <div id='app-name'>Street Feature-Location Mapping Tool</div>
     </header>
+
     <!-- Loader -->
     <div id='loader-scene'>
       <p class='welcome'>Data visualization tools utilized by historians, urban scholars, architects, and community stakeholders, to assess urban change at the street level in modern cities.</p>
@@ -368,7 +372,18 @@
     </div>
     <!-- Canvas -->
 
-   <!-- photomap div -->
+    <button id="open-search-button" onclick="openNav()">&#x1F50D;</button>
+    <div id="mySidepanel" class="sidepanel">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="#">About</a>
+      <p>TEST</p>
+    </div>
+
+
+
+
+  <!-- photomap div -->
+
     <div id='photomap-canvas-container'>
        <div id='photomap-controls-container'>
         <div id='range-slider'>
@@ -376,10 +391,6 @@
           <input id='pointsize-range-input' min='0' max='0.03' value='0.0' step='0.00001' type='range' />
         </div>
         <div id='icons'>
-         <!--
-          <img id='layout-date' src='assets/images/icons/date-layout.svg' />
-          <img id='layout-grid' src='assets/images/icons/az-layout.svg' />
-          -->
           <img id='layout-umap' src='assets/images/icons/scatter-layout.svg' />
           <img id='layout-rasterfairy' src='assets/images/icons/grid-layout.svg' />
         </div>
@@ -390,21 +401,24 @@
         <canvas id='sflmt-canvas' />
       </div>
 
-      <div id='selection-icons' > <!--class='no-highlight'-->
+      <div id='selection-icons' >
       	<img id='pan' src='assets/images/icons/pan.svg' class='active' />
       	<img id='select' src='assets/images/icons/select-box.svg' class='' />
       </div>
     </div>
 
-    <!-- streetmap div -->
+
+  <!-- streetmap div -->
+
     <div id='streetmap-canvas-container'>
     	<div id='canvas-target'>
-			<div id="streetmap">
-			</div>
-		</div>
-	</div>
+  			<div id="streetmap">
+  			</div>
+		  </div>
+	  </div>
 
-    <!-- Image Picker: single image selection -->
+  <!-- Image Picker: single image selection -->
+
     <script type='text/html' id='selected-image-template'>
       <div class='modal-content'>
         <div class='modal-top'>
@@ -441,7 +455,9 @@
         </div>
       </div>
     </script>
+
     <div id='selected-image-target' class='no-highlight'></div>
+
     <!-- Image Selection: multi-image selection -->
     <div id='selected-images-count' class='no-highlight'>
       <div id='count-target'>0</div>
@@ -496,6 +512,8 @@
     <noscript>
       <span class='browser-message'>Sorry, your browser is not able to load a WebGL scene currently. Please enable JavaScript and try again.</span>
     </noscript>
+
+
 
     <script type="text/javascript" src='assets/libs/leaflet/leaflet.js'></script>
     <script type='text/javascript' src='assets/libs/three.min.js'></script>
