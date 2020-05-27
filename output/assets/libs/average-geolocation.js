@@ -37,7 +37,7 @@ function averageGeolocation(coords) {
     longitude: centralLongitude * 180 / Math.PI
   };
 }
-/*
+
 // expect ~ 37.790831, -122.407169
 const sf = [{
   latitude: 37.797749,
@@ -65,4 +65,3 @@ const globe = [{ // Japan
 }];
 
 console.log(averageGeolocation(globe));
-*/

@@ -93,37 +93,34 @@ select:disabled {
 /** The sidepanel menu **/
 
 .sidepanel {
- height: 360px; /* Specify a height */
+ height: 250px; /* Specify a height */
  width: 0; /* 0 width - change this with JavaScript */
- position: absolute; /* Stay in place */
+ position: fixed; /* Stay in place */
  z-index: 1; /* Stay on top */
- top: 120px;
+ top: 120;
  left: 0;
- background-color: #222; /* Black*/
+ background-color: #111; /* Black*/
  overflow-x: hidden; /* Disable horizontal scroll */
- padding-top: 5px; /* Place content 60px from the top */
+ padding-top: 60px; /* Place content 60px from the top */
  transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
- opacity: 0.9;
- border-radius: 4px;
 }
 
 /* The sidepanel links */
 .sidepanel a {
- padding: 8px 8px 8px 40px;
- text-decoration: none;
- font-size: 30px;
- color: #fff;
- display: inline-block;
- transition: 0.3s;
- white-space: nowrap;
-}
-
-.sidepanel p {
- padding: 8px 8px 8px 40px;
+ padding: 8px 8px 8px 32px;
  text-decoration: none;
  font-size: 14px;
  color: #fff;
- display: inline-block;
+ display: block;
+ transition: 0.3s;
+}
+
+.sidepanel p {
+ padding: 8px 8px 8px 32px;
+ text-decoration: none;
+ font-size: 14px;
+ color: #fff;
+ display: block;
  transition: 0.3s;
 }
 
@@ -137,8 +134,8 @@ select:disabled {
  position: absolute;
  top: 120;
  right: 25px;
- font-size: 25px;
- margin-left: 180px;
+ font-size: 36px;
+ margin-left: 50px;
 }
 
 /* Style the button that is used to open the sidepanel */
