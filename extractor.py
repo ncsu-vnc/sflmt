@@ -2,7 +2,10 @@ from keras.preprocessing import image
 from keras.applications.vgg16 import VGG16, preprocess_input
 from keras.models import Model
 import numpy as np
+import tensorflow as tf
 
+gpus = tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(gpus[0], True)
 
 class ImageFeatureExtractor:
     def __init__(self):

@@ -1,5 +1,3 @@
-#import http.server
-#import socketserver
 from http.server import HTTPServer as BaseHTTPServer, SimpleHTTPRequestHandler
 import os, sys, getopt
 
