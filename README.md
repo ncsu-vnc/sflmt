@@ -29,9 +29,9 @@ python server.py
 # default directory -> "output", main http server port -> 8000 , flask server port -> 5000
 ```
 
-## Access SFLMT
+## Access SFLMT via web browser (after server started)
 
-http://127.0.0.1:8000
+'''http://127.0.0.1:8000'''
 
 ## Acknowledgements
 The WebGL image viewer within this tool is largely repurposed from the Yale DH Pixplot project (https://github.com/YaleDHLab/pix-plot), authored by Yale Digital Humanities Lab Developer Douglas Duhaim.
