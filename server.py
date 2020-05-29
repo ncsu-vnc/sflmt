@@ -80,7 +80,7 @@ def flaskServer():
         if request.method == 'POST':
             file = request.files['query_img']
             img = Image.open(file.stream)  # PIL image
-            base_img_path = '/assets/uploaded/' + datetime.now().isoformat() + "_" + file.filename
+            base_img_path = '/assets/uploaded/' + datetime.now().strftime("%Y-%m-%d_%I-%M-%S_%p") + "_" + file.filename
             uploaded_img_path = './' + sflmt_dir + base_img_path
             img.save(uploaded_img_path)
             query = fe.extract(img)
