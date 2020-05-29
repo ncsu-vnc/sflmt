@@ -20,13 +20,18 @@ python sflmt.py --images "./sample-images/files/*.jpg" --latlong "./sample-image
 #python sflmt.py --images "path/to/images/*.jpg" --latlong "path/to/metadata/*.json"
 ```
 
-## start SFLMT server
+## Start SFLMT server
 
 ```bash
 python server.py
-# usage: sflmt-server.py -d <directory> -p <port>
-# default directory "./" port 5000
+
+# usage: sflmt-server.py -d <directory> -m <main http server port> -f <flask server port>
+# default directory -> "output", main http server port -> 8000 , flask server port -> 5000
 ```
+
+## Access SFLMT
+
+http://127.0.0.1:8000
 
 ## Acknowledgements
 The WebGL image viewer within this tool is largely repurposed from the Yale DH Pixplot project (https://github.com/YaleDHLab/pix-plot), authored by Yale Digital Humanities Lab Developer Douglas Duhaim.
