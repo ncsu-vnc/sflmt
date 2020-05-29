@@ -2870,13 +2870,13 @@ function getPath(path) {
 
 /* Set the width of the sidebar to 250px (show it) */
 function openNav() {
-  document.getElementById("mySidepanel").style.width = "250px";
+  document.getElementById("searchpanel").style.width = "360px";
 }
 
 /* Set the width of the sidebar to 0 (hide it) */
 function closeNav() {
-  document.getElementById("mySidepanel").style.width = "0";
-} 
+  document.getElementById("searchpanel").style.width = "0";
+}
 
 /**
 * Scale each dimension of an array -1:1
@@ -2967,3 +2967,23 @@ var dates = new Dates();
 var lod = new LOD();
 var data = new Data();
 var imagesLatLong = new ImagesLatLong();
+
+// f key
+window.onkeypress = function(event) {
+   if (event.keyCode == 102) {
+   }
+}
+
+//receive search data from iframe
+window.addEventListener("message", function(event) {
+
+  selection.clear();
+  for (var i=0; i<data.json.images.length; i++) {
+    for (var j=0; j<event.data.length; j++) {
+      if (data.json.images[i] == event.data[j]){
+        selection.selected[i] = true;
+      }
+    }
+  }
+  //console.log(event.data);
+});

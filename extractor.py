@@ -4,7 +4,7 @@ from keras.models import Model
 import numpy as np
 
 
-class FeatureExtractor:
+class ImageFeatureExtractor:
     def __init__(self):
         base_model = VGG16(weights='imagenet')
         self.model = Model(inputs=base_model.input, outputs=base_model.get_layer('fc1').output)

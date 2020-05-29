@@ -92,16 +92,49 @@ select:disabled {
 
 /** The sidepanel menu **/
 
+#searchframe {
+
+  position: relative;
+  top: 32px;
+  left: 32px;
+  height:560px;
+  width: 300px;
+  outline: none
+  overflow-x: hidden;
+  border: 0;
+}
+
+
+
+#searchframe iframe {
+
+  overflow: hidden;
+  outline: none
+  overflow-x: hidden;
+  border: 0;
+}
+
+.imagesearch input{
+
+
+}
+
+#searchpanel {
+  position: absolute;
+  height: 600px; /* Specify a height */
+  width: 0px; /* 0 width - change this with JavaScript */
+  top: 120px;
+  left: 0px;
+  opacity: 0.9;
+}
+
 .sidepanel {
- height: 250px; /* Specify a height */
- width: 0; /* 0 width - change this with JavaScript */
- position: fixed; /* Stay in place */
+
+  /* position: fixed; Stay in place */
  z-index: 1; /* Stay on top */
- top: 120;
- left: 0;
  background-color: #111; /* Black*/
  overflow-x: hidden; /* Disable horizontal scroll */
- padding-top: 60px; /* Place content 60px from the top */
+  /* padding-top: 60px;  Place content 60px from the top */
  transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
 }
 
@@ -116,7 +149,7 @@ select:disabled {
 }
 
 .sidepanel p {
- padding: 8px 8px 8px 32px;
+ padding: 40px 40px 40px 40px;
  text-decoration: none;
  font-size: 14px;
  color: #fff;
@@ -129,7 +162,7 @@ select:disabled {
  color: #f1f1f1;
 }
 
-/* Position and style the close button (top right corner) */
+/* Position and style the close button (top right corner)
 .sidepanel .closebtn {
  position: absolute;
  top: 120;
@@ -137,18 +170,31 @@ select:disabled {
  font-size: 36px;
  margin-left: 50px;
 }
+*/
 
 /* Style the button that is used to open the sidepanel */
 #open-search-button {
 
  position: absolute;
- left: 0px;
  top: 120px;
+ left: 0px;
  z-index: 2;
- background: #222;
+ background: #111;
  font-size: 14px;
+ outline: none;
+ opacity: 0.8;
 }
 
+/* Style the button that is used to open the sidepanel */
+#close-search-button {
+ position: absolute;
+ top: 0px;
+ left: 320px;
+ z-index: 2;
+ background: #111;
+ font-size: 30px;
+ outline: none;
+}
 
 /** street map canvas - right panel **/
 
