@@ -9,6 +9,7 @@ from PIL import Image
 from extractor import ImageFeatureExtractor
 from datetime import datetime
 from flask import Flask, request, render_template
+import logging
 import threading
 import json
 
@@ -49,6 +50,10 @@ for opt, arg in opts:
 	   main_port = arg
    elif opt in ("-f"):
 	   flask_port = arg
+
+#turn off general log messages to the console, only print errors
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 def mainServer():
 
@@ -92,7 +97,7 @@ def flaskServer():
         else:
             return render_template('search.html')
 
-    app.run("0.0.0.0", port = flask_port)
+    app.run("127.0.0.1", port = flask_port)
 
 if __name__ == "__main__":
 
