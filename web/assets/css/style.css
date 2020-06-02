@@ -179,10 +179,9 @@ select:disabled {
  top: 120px;
  left: 0px;
  z-index: 2;
- background: #111;
+ background: #e60100;
  font-size: 14px;
  outline: none;
- opacity: 0.8;
 }
 
 /* Style the button that is used to open the sidepanel */

@@ -16,7 +16,7 @@ main_port = 8000
 flask_port = 5000
 sflmt_dir = "output"
 
-search_results = 15
+search_results = 50
 
 class HTTPHandler(SimpleHTTPRequestHandler):
     """This handler uses server.base_path instead of always using os.getcwd()"""

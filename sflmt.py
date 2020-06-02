@@ -126,14 +126,25 @@ def copy_web_assets(**kwargs):
 ##
 
 def extract_image_features(**kwargs):
-    fe = ImageFeatureExtractor()
+	fe = ImageFeatureExtractor()
+	for img_path in sorted(glob2.glob(kwargs['images'])):
+		if not os.path.exists(str(kwargs['out_dir']) + '/data/feature/'):os.makedirs(str(config['out_dir']) + '/data/feature/')
+		feature_path = kwargs['out_dir'] + '/data/feature/' + os.path.splitext(os.path.basename(img_path))[0] + '.pkl'
+		if not os.path.exists(feature_path):
+			print(' * extracting image features: ' + img_path)
+			img = PIL.Image.open(img_path)  # PIL image
+			feature = fe.extract(img)
+			pickle.dump(feature, open(feature_path, 'wb'))
+'''
     for img_path in sorted(glob2.glob(kwargs['images'])):
-        print(' * extracting image features: ' + img_path)
-        img = PIL.Image.open(img_path)  # PIL image
-        feature = fe.extract(img)
-        if not os.path.exists(str(kwargs['out_dir']) + '/data/feature/'): os.makedirs( str(config['out_dir']) + '/data/feature/')
-        feature_path = kwargs['out_dir'] + '/data/feature/' + os.path.splitext(os.path.basename(img_path))[0] + '.pkl'
-        pickle.dump(feature, open(feature_path, 'wb'))
+	#if not os.path.exists(str(kwargs['out_dir']) + '/data/feature/'):os.makedirs(str(config['out_dir']) + '/data/feature/')
+	feature_path = kwargs['out_dir'] + '/data/feature/' + os.path.splitext(os.path.basename(img_path))[0] + '.pkl'
+        if not os.path.exists(feature_path):	
+		print(' * extracting image features: ' + img_path)
+		img = PIL.Image.open(img_path)  # PIL image
+		feature = fe.extract(img)
+		pickle.dump(feature, open(feature_path, 'wb'))
+'''
 
 def filter_images(**kwargs):
   '''Main method for filtering images given user metadata (if provided)'''
@@ -444,7 +455,7 @@ def save_atlas(atlas, out_dir, n):
 def get_layouts(**kwargs):
   '''Get the image positions in each projection'''
   vecs = vectorize_images(**kwargs)
-  umap = get_umap_layout(vecs=vecs, **kwargs)
+  umap = get_umap_layout(vecs=vecs, **kwargs) # get_tsne_layout
   raster = get_rasterfairy_layout(umap=umap, **kwargs)
   grid = get_grid_layout(**kwargs)
   umap_jittered = get_pointgrid_layout(umap, 'umap', **kwargs)
@@ -506,7 +517,7 @@ def get_tsne_layout(**kwargs):
   print(' * creating TSNE layout with ' + str(multiprocessing.cpu_count()) + ' cores...')
   out_path = get_path('layouts', 'tsne', **kwargs)
   if os.path.exists(out_path) and kwargs['use_cache']: return out_path
-  model = TSNE(perplexity=kwargs.get('perplexity', 2),n_jobs=multiprocessing.cpu_count())
+  model = TSNE(perplexity = 50, learning_rate = 500, n_iter = 5000, n_jobs=multiprocessing.cpu_count()) #kwargs.get('perplexity', 2)
   z = model.fit_transform(kwargs['vecs'])
   return write_layout(out_path, z, **kwargs)
 
