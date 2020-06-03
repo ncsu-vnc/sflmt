@@ -11,8 +11,8 @@ import logging, threading, json, socket
 from time import sleep
 import netifaces as ni
 
-ni.ifaddresses('eno1')
-ip = ni.ifaddresses('eno1')[ni.AF_INET][0]['addr']
+#ni.ifaddresses('eno1')
+#ip = ni.ifaddresses('eno1')[ni.AF_INET][0]['addr']
 
 base_ip_address = '127.0.0.1' #ip
 base_URL = 'http://' + base_ip_address
