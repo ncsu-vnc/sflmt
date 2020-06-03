@@ -24,6 +24,15 @@ a {
   display: inline-block;
 }
 
+nav h2 {
+  font-size: 0.9em;
+  line-height: 1.05em;
+  text-align: center;
+  margin: 10px 0;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
 select {
   border-radius: 0;
   -webkit-appearance: none;
@@ -79,12 +88,6 @@ select:disabled {
 
 #photomap-canvas-container {
   position: absolute;
-	/**
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-	**/
   height: 100%;
   width: 50%;
   overflow: hidden;
@@ -112,10 +115,7 @@ select:disabled {
   border: 0;
 }
 
-.imagesearch input{
-
-
-}
+.imagesearch input{}
 
 #searchpanel {
   position: absolute;
@@ -123,16 +123,13 @@ select:disabled {
   width: 0px; /* 0 width - change this with JavaScript */
   top: 120px;
   left: 0px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .sidepanel {
-
-  /* position: fixed; Stay in place */
  z-index: 1; /* Stay on top */
  background-color: #e60100; /* Black*/
  overflow-x: hidden; /* Disable horizontal scroll */
-  /* padding-top: 60px;  Place content 60px from the top */
  transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
 }
 
@@ -156,23 +153,9 @@ select:disabled {
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidepanel a:hover {
- color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner)
-.sidepanel .closebtn {
- position: absolute;
- top: 120;
- right: 25px;
- font-size: 36px;
- margin-left: 50px;
-}
-*/
-
+.sidepanel a:hover {color: #f1f1f1;}
 /* Style the button that is used to open the sidepanel */
 #open-search-button {
-
  position: absolute;
  top: 120px;
  left: 0px;
@@ -180,25 +163,18 @@ select:disabled {
  background: #e60100;
  display: inline-block;
  vertical-align: top;
+ opacity:0.9;
 }
-
 #open-search-button img {
-
   width: 20px;
   cursor: pointer;
   vertical-align: top;
   outline:none;
   opacity:0.8;
 }
+#open-search-button:hover img {opacity:1.0;}
 
-#open-search-button:hover img {
-
-  opacity:1.0;
-}
-
-#file-search{
-
-}
+#file-search{}
 
 /* Style the button that is used to open the sidepanel */
 #close-search-button {
@@ -235,7 +211,6 @@ select:disabled {
   z-index: 1;
 }
 
-
 #canvas-target {
   position: absolute;
   top: -60px;
@@ -264,18 +239,9 @@ select:disabled {
   height: 100%;
   width: 100%;
 }
-
-#sflmt-canvas.pan {
-  cursor: grab;
-}
-
-#sflmt-canvas.pan:active {
-  cursor: grabbing;
-}
-
-#sflmt-canvas.select {
-  cursor: crosshair;
-}
+#sflmt-canvas.pan {cursor: grab;}
+#sflmt-canvas.pan:active {cursor: grabbing;}
+#sflmt-canvas.select {cursor: crosshair;}
 
 #stats {
   position: absolute;
@@ -402,47 +368,6 @@ input[type=range]::-ms-thumb {
   margin-top: 6px;
 }
 
-/**
-* Dual range slider
-**/
-
-#date-slider {
-  height: 6px;
-  width: 100px;
-  display: inline-block;
-  vertical-align: top;
-  position: relative;
-  top: 16px;
-  margin-left: 10px;
-}
-
-#date-slider .noUi-connect {
-  background: #eab755;
-}
-
-#date-slider .noUi-handle {
-  background: #eee;
-  box-shadow: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 16px;
-  right: -8px;
-  border: 1px solid #888;
-}
-
-#date-slider .noUi-handle::before,
-#date-slider .noUi-handle::after {
-  display: none;
-}
-
-#date-slider .noUi-tooltip {
-  font-size: 9px;
-  padding: 0;
-  margin-bottom: 1px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #c4c4c4;
-}
 
 /**
 * Icons
@@ -456,18 +381,20 @@ input[type=range]::-ms-thumb {
 #icons img {
   width: 21px;
   margin: 0 8px;
-  opacity: 0.2;
+  opacity: 0.4;
   cursor: pointer;
   vertical-align: top;
 }
 
 #icons img.active {
-  opacity: 1;
+  opacity: 0.9;
 }
 
-#layout-date {
-  display: none;
+#icons img:hover {
+  opacity: 1.0;
 }
+
+#layout-date {display: none;}
 
 /**
 * Map controls
@@ -503,14 +430,6 @@ input[type=range]::-ms-thumb {
   cursor: pointer;
 }
 
-nav h2 {
-  font-size: 0.9em;
-  line-height: 1.05em;
-  text-align: center;
-  margin: 10px 0;
-  text-transform: uppercase;
-  font-weight: 400;
-}
 
 /**
 * Loader
@@ -567,7 +486,6 @@ nav h2 {
   }
 }
 
-
 /**
 * Loader icon
 **/
@@ -586,9 +504,6 @@ nav h2 {
 /**
 * button
 **/
-
-
-
 button {
   border: none;
   background: #fff;
@@ -604,27 +519,23 @@ button {
   margin: 0 auto;
   outline: none;
 }
-
-button:active {
-
-}
-
+button:active {outline: none;}
 button:hover {
   cursor: pointer;
+  outline: none;
+}
+button:focus {outline: none;}
 
-
-
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner,
+input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border: none;
 }
 
-
-#enter-button {
-
-  padding: 10px 40px;
-
-}
-
+#enter-button {padding: 10px 40px;}
 #enter-button:hover {
-
   padding: 10px 40px;
   border-style: solid;
   border-width: 2px;
@@ -633,10 +544,18 @@ button:hover {
   outline: none;
 }
 
-#close-search {
-
-
+#download-metadata:hover {
+  border-style: solid;
+  border-width: 2px;
+  color: #fff;
+  background: #e60100;
+  outline: none;
+  border-color: #e60100;
 }
+#download-metadata button::-moz-focus-inner {
+  border: 0;
+}
+
 
 
 /**
@@ -684,6 +603,7 @@ noscript {
   display: flex;
   align-items: center;
   height: calc(100vh - 175px);
+  background-color: #aaa;
 }
 
 .modal-top h2 {
@@ -869,9 +789,7 @@ noscript {
   vertical-align: top;
 }
 
-#meta-tags {
-  margin: 0 -2px 10px;
-}
+#meta-tags {margin: 0 -2px 10px;}
 
 .meta-tag {
   display: inline-block;
@@ -885,17 +803,12 @@ noscript {
 }
 
 @media (max-width: 800px) {
-  .modal-text-left {
-    width: 100%;
-  }
-
-  .modal-text-right {
-    width: 100%;
-  }
+  .modal-text-left {width: 100%;}
+  .modal-text-right {width: 100%;}
 }
 
 /**
-* Multi-image Selection
+* selection/pan tool palette
 **/
 
 #selection-icons {
@@ -911,38 +824,24 @@ noscript {
   border-radius: 3px;
   transition: opacity 0.5s;
 }
-
-
 #selection-icons img {
   display: inline-block;
   padding: 7px;
-  background: lightgray;
+  background: #eee;
   border-radius: 3px;
   max-height: 100%;
   box-sizing: border-box;
   margin: 5px 0;
-  opacity: 0.8;
+  opacity: 0.5;
   cursor: pointer;
 }
-
-#selection-icons img.active {
-  opacity: 1.0;
-}
-
 #selection-icons img:hover {
   background: #fff;
   opacity: 1.0;
 }
-
-#pan {
-
-  left: 0px;
-}
-
-#select {
-
-  left: 40px;
-}
+#selection-icons .active {opacity: 1.0;}
+#pan {left: 0px;}
+#select {left: 40px;}
 
 /**
 * Multi-image Modal
@@ -968,7 +867,6 @@ noscript {
   text-align: center;
   font-size: 20px;
 }
-
 
 #view-selected {
   display: none;
@@ -1074,10 +972,19 @@ input[type=text] {
   min-width: 120px;
 }
 
-#download-link {
-  vertical-align: top;
+#selected-images-modal input {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  height: 40px;
+  box-sizing: border-box;
 }
+#selected-images-modal .modal-text-right {white-space: nowrap;}
 
+/**
+* download
+**/
+
+#download-link {vertical-align: top;}
 #download-link button {
   display: inline-block;
   margin-left: -5px;
@@ -1088,36 +995,64 @@ input[type=text] {
   height: 40px;
 }
 
-#selected-images-modal input {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  height: 40px;
-  box-sizing: border-box;
-}
-
-#selected-images-modal .modal-text-right {
-  white-space: nowrap;
-}
-
-
-#download-as {
-  margin-top: 10px;
-}
-
-#download-as span {
-  margin-right: 2px;
-}
-
+#download-as {margin-top: 10px;}
+#download-as span {margin-right: 2px;}
 #download-as button {
   opacity: 1;
-  background-color: #d2d2d2;
+  background-color: #fff;
+  color: #e60100;
   padding: 4px 8px;
   display: inline-block;
   border-radius: 4px;
+  border-color: #e60100;
   font-size: 12px;
   margin: 2px;
+  opacity: 0.5;
+  outline: 0;
 }
-
 #download-as button.active {
   background-color: #e60100;
+  color: #fff;
+  opacity: 1.0;
+  border-color: #e60100;
+}
+#download-as button::-moz-focus-inner {
+  border: 0;
+}
+
+/** UNUSED FOR NOW **/
+
+/**
+* Dual range slider
+**/
+
+#date-slider {
+  height: 6px;
+  width: 100px;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  top: 16px;
+  margin-left: 10px;
+}
+
+#date-slider .noUi-connect {background: #eab755;}
+#date-slider .noUi-handle {
+  background: #eee;
+  box-shadow: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 16px;
+  right: -8px;
+  border: 1px solid #888;
+}
+#date-slider .noUi-handle::before,
+#date-slider .noUi-handle::after {display: none;}
+#date-slider .noUi-tooltip {
+  font-size: 9px;
+  padding: 0;
+  margin-bottom: 1px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #c4c4c4;
 }

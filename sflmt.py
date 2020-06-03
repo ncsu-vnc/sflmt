@@ -57,11 +57,20 @@ try:
 except:
   from urllib import unquote # python 2
 
+MEMORY_LIMIT = 4096
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=MEMORY_LIMIT)])
+    except RuntimeError as e:
+        print(e)
+'''
 # handle dynamic GPU memory allocation
 tf_config = tf.compat.v1.ConfigProto()
 tf_config.gpu_options.allow_growth = True
 tf_config.log_device_placement = True
 sess = tf.compat.v1.Session(config=tf_config)
+'''
 
 '''
 NB: Keras Image class objects return image.size as w,h
@@ -126,7 +135,7 @@ def copy_web_assets(**kwargs):
 ##
 
 def extract_image_features(**kwargs):
-	fe = ImageFeatureExtractor()
+	fe = ImageFeatureExtractor(useGPU = True)
 	for img_path in sorted(glob2.glob(kwargs['images'])):
 		if not os.path.exists(str(kwargs['out_dir']) + '/data/feature/'):os.makedirs(str(config['out_dir']) + '/data/feature/')
 		feature_path = kwargs['out_dir'] + '/data/feature/' + os.path.splitext(os.path.basename(img_path))[0] + '.pkl'
@@ -139,7 +148,7 @@ def extract_image_features(**kwargs):
     for img_path in sorted(glob2.glob(kwargs['images'])):
 	#if not os.path.exists(str(kwargs['out_dir']) + '/data/feature/'):os.makedirs(str(config['out_dir']) + '/data/feature/')
 	feature_path = kwargs['out_dir'] + '/data/feature/' + os.path.splitext(os.path.basename(img_path))[0] + '.pkl'
-        if not os.path.exists(feature_path):	
+        if not os.path.exists(feature_path):
 		print(' * extracting image features: ' + img_path)
 		img = PIL.Image.open(img_path)  # PIL image
 		feature = fe.extract(img)

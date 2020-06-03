@@ -8,11 +8,12 @@ from datetime import datetime
 from flask import Flask, request, render_template
 from time import sleep
 import netifaces as ni
+import tensorflow as tf
 
 #ni.ifaddresses('eno1')
 #ip = ni.ifaddresses('eno1')[ni.AF_INET][0]['addr']
 
-base_ip_address = '10.0.0.6' #ip #put current ip here
+base_ip_address = '127.0.0.1' #ip #put current ip here
 base_URL = 'http://' + base_ip_address
 main_port = 8000
 flask_port = 5000
@@ -64,7 +65,7 @@ def mainServer():
 def flaskServer():
 
     # Read image features
-    fe = ImageFeatureExtractor()
+    fe = ImageFeatureExtractor(useGPU = False)
     features = []
     img_paths = []
     for feature_path in glob2.glob(sflmt_dir + '/data/feature/*'):
