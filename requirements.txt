@@ -4,6 +4,7 @@
 
 Flask
 rasterfairy-py3
+netifaces
 
 ###### Requirements with Version Specifiers ######
 
