@@ -12,7 +12,7 @@ import netifaces as ni
 #ni.ifaddresses('eno1')
 #ip = ni.ifaddresses('eno1')[ni.AF_INET][0]['addr']
 
-base_ip_address = '127.0.0.1' #ip
+base_ip_address = '10.0.0.6' #ip #put current ip here
 base_URL = 'http://' + base_ip_address
 main_port = 8000
 flask_port = 5000

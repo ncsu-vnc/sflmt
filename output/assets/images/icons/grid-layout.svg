@@ -1,13 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-  <g id="Group_306" data-name="Group 306" transform="translate(-266 -309)">
-    <rect id="Rectangle_392" data-name="Rectangle 392" width="4" height="4" rx="0.5" transform="translate(266 309)" fill="#eee"/>
-    <rect id="Rectangle_386" data-name="Rectangle 386" width="4" height="4" rx="0.5" transform="translate(266 315)" fill="#999"/>
-    <rect id="Rectangle_380" data-name="Rectangle 380" width="4" height="4" rx="0.5" transform="translate(266 321)" fill="#555"/>
-    <rect id="Rectangle_393" data-name="Rectangle 393" width="4" height="4" rx="0.5" transform="translate(272 309)" fill="#eee"/>
-    <rect id="Rectangle_387" data-name="Rectangle 387" width="4" height="4" rx="0.5" transform="translate(272 315)" fill="#999"/>
-    <rect id="Rectangle_381" data-name="Rectangle 381" width="4" height="4" rx="0.5" transform="translate(272 321)" fill="#555"/>
-    <rect id="Rectangle_396" data-name="Rectangle 396" width="4" height="4" rx="0.5" transform="translate(278 309)" fill="#eee"/>
-    <rect id="Rectangle_390" data-name="Rectangle 390" width="4" height="4" rx="0.5" transform="translate(278 315)" fill="#999"/>
-    <rect id="Rectangle_383" data-name="Rectangle 383" width="4" height="4" rx="0.5" transform="translate(278 321)" fill="#555"/>
-  </g>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 16 16" style="enable-background:new 0 0 16 16;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#BFBFBF;}
+	.st2{fill:#7F7F7F;}
+</style>
+<g id="Group_306" transform="translate(-266 -309)">
+	<path id="Rectangle_392" class="st0" d="M266.5,309h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C266,309.2,266.2,309,266.5,309z"/>
+	<path id="Rectangle_386" class="st1" d="M266.5,315h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C266,315.2,266.2,315,266.5,315z"/>
+	<path id="Rectangle_380" class="st2" d="M266.5,321h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C266,321.2,266.2,321,266.5,321z"/>
+	<path id="Rectangle_393" class="st0" d="M272.5,309h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C272,309.2,272.2,309,272.5,309z"/>
+	<path id="Rectangle_387" class="st1" d="M272.5,315h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C272,315.2,272.2,315,272.5,315z"/>
+	<path id="Rectangle_381" class="st2" d="M272.5,321h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C272,321.2,272.2,321,272.5,321z"/>
+	<path id="Rectangle_396" class="st0" d="M278.5,309h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C278,309.2,278.2,309,278.5,309z"/>
+	<path id="Rectangle_390" class="st1" d="M278.5,315h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C278,315.2,278.2,315,278.5,315z"/>
+	<path id="Rectangle_383" class="st2" d="M278.5,321h3c0.3,0,0.5,0.2,0.5,0.5v3c0,0.3-0.2,0.5-0.5,0.5h-3c-0.3,0-0.5-0.2-0.5-0.5v-3
+		C278,321.2,278.2,321,278.5,321z"/>
+</g>
 </svg>
