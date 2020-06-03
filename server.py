@@ -1,13 +1,11 @@
 from http.server import HTTPServer as BaseHTTPServer, SimpleHTTPRequestHandler
-import os, sys, getopt
-
+import os, sys, getopt, logging, threading, json, socket
 import glob2, pickle
 import numpy as np
 from PIL import Image
 from extractor import ImageFeatureExtractor
 from datetime import datetime
 from flask import Flask, request, render_template
-import logging, threading, json, socket
 from time import sleep
 import netifaces as ni
 
@@ -107,7 +105,7 @@ def flaskServer():
 
 def announce():
     sleep(5)
-    os.system('clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print('----------------------------------')
     print('SFLMT server')
     print('to access - '  + base_URL + ':8000')
