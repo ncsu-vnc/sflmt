@@ -4,13 +4,14 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
-        html, body {background-color: transparent; font-size:11px; font-family: 'Roboto', sans-serif;}
+        html, body {background-color: transparent; font-size:11px; font-family: 'Roboto', sans-serif; color: lightgray;}
         p {color: lightgray;}
         a {font-size:11px; color: lightgray;}
         figure {float: left; margin-right: 20px; margin-bottom: 20px;}
         figcaption {font-size:9px; color: lightgray;}
         img {padding-top: 0px; padding-right: 10px; padding-bottom: 5px;padding-left: 0px;}
         input[type='file'] {color: lightgray;}
+        input[type='submit'] {color: black;}
     </style>
     <script type="text/javascript">
         function returnSearch(data) {
@@ -26,19 +27,22 @@
         <div id="searchform" class="container">
             <br>
             <form method="POST" enctype="multipart/form-data">
-                <input style="font-size:11px; width: 300px; height: 30px;" type="file" name="query_img">
-                <input style="font-size:11px; width: 100px; height: 30px;" type="submit">
+                <input style="font-size:11px; width: 200px; height: 30px;" type="file" name="query_img" value="{{ filename }}">
+                <input style="font-size:11px; width: 100px; height: 30px;" type="submit">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;query size:&nbsp;
+                <input type="text" style="font-size:1wpx; width: 50px;" name="query_size" value="{{ querysize }}"> <br>
             </form>
             <hr>
             <p><b>Query:</b></p>
             {% if query_path %}
             <img src="{{ query_path }}" height="100px">
             {% endif %}
+            <!--
             <hr>
             <p><b>Results:</b></p>
+            -->
             {% for score in scores %}
-              <a href="{{ score[1] }}" target=”_blank”> {{ score[2] }} - {{ score[0] }}</a>
-              <br> <!--<img src="{{ score[1] }}" height="32px"> -->
+              <!--<a href="{{ score[1] }}" target=”_blank”> {{ score[2] }} - {{ score[0] }}</a>-->
+              <!--<br><img src="{{ score[1] }}" height="32px"> -->
             {% endfor %}
         </div>
     </body>

@@ -97,7 +97,7 @@ select:disabled {
   position: relative;
   top: 32px;
   left: 32px;
-  height:560px;
+  height:300px;
   width: 300px;
   outline: none
   overflow-x: hidden;
@@ -121,11 +121,12 @@ select:disabled {
 
 #searchpanel {
   position: absolute;
-  height: 600px; /* Specify a height */
+  height: 360px; /* Specify a height */
   width: 0px; /* 0 width - change this with JavaScript */
   top: 120px;
   left: 0px;
   opacity: 0.9;
+
 }
 
 .sidepanel {
@@ -182,6 +183,7 @@ select:disabled {
  background: #e60100;
  font-size: 14px;
  outline: none;
+ color: #fff;
 }
 
 /* Style the button that is used to open the sidepanel */
@@ -348,7 +350,7 @@ input[type=range] {
   width: 100%;
   height: 2px;
   border-radius: 10px;
-  background: #c3c3c3;
+  background: #eeeeee;
   outline: none;
 }
 
@@ -371,10 +373,9 @@ input[type=range]::-ms-thumb {
 }
 
 #range-slider label {
-  color: #c3c3c3;
+  color: #ffffff;
   font-size: 9px;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
   display: block;
 }
 
@@ -461,10 +462,9 @@ input[type=range]::-ms-thumb {
   font-size: 12px;
   padding: 5px;
   border-radius: 3px;
-  color: #dedede;
-  background: #222;
+  color: #ffffff;
+  background: #e60100;
   font-family: courier;
-  text-transform: uppercase;
   transition: opacity 0.5s;
   opacity: 0;
 }
@@ -867,7 +867,7 @@ noscript {
   width: 74px;
   height: 44px;
   padding: 0 5px;
-  background: #222;
+  background: #e60100;
   border-radius: 4px;
   transition: opacity 0.5s;
 }
@@ -881,7 +881,7 @@ noscript {
   max-height: 100%;
   box-sizing: border-box;
   margin: 5px 0;
-  opacity: 0.5;
+  opacity: 0.7;
   cursor: pointer;
 }
 

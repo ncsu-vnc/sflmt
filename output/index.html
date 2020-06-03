@@ -347,8 +347,6 @@
     }
     </script>
 
-
-
     <!-- Header -->
 
     <header id='header' class='no-highlight'>
@@ -384,7 +382,7 @@
     <div id='photomap-canvas-container'>
        <div id='photomap-controls-container'>
         <div id='range-slider'>
-          <label>Point Size</label>
+          <label><b>Point Size<b></label>
           <input id='pointsize-range-input' min='0' max='0.03' value='0.0' step='0.00001' type='range' />
         </div>
         <div id='icons'>
@@ -521,5 +519,12 @@
     <script type='text/javascript' src='assets/libs/papaparse.min.js'></script>
     <script type='text/javascript' src='assets/libs/no-ui-slider.min.js'></script>
     <script type='text/javascript' src='assets/js/sflmt.js'></script>
+    <script type="text/javascript">
+        window.onload=function()
+        {
+          var ip=window.location.hostname;
+          document.getElementById('searchframe').src = 'http://' + ip.toString() + ':5000/search';
+        };
+    </script>
   </body>
 </html>

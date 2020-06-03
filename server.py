@@ -7,16 +7,20 @@ from PIL import Image
 from extractor import ImageFeatureExtractor
 from datetime import datetime
 from flask import Flask, request, render_template
-import logging
-import threading
-import json
+import logging, threading, json, socket
+from time import sleep
+import netifaces as ni
 
-base_URL = 'http://127.0.0.1'
+ni.ifaddresses('eno1')
+ip = ni.ifaddresses('eno1')[ni.AF_INET][0]['addr']
+
+base_ip_address = '127.0.0.1' #ip
+base_URL = 'http://' + base_ip_address
 main_port = 8000
 flask_port = 5000
 sflmt_dir = "output"
 
-search_results = 50
+search_results = 10
 
 class HTTPHandler(SimpleHTTPRequestHandler):
     """This handler uses server.base_path instead of always using os.getcwd()"""
@@ -77,28 +81,42 @@ def flaskServer():
     def search():
         if request.method == 'POST':
             file = request.files['query_img']
-            img = Image.open(file.stream)  # PIL image
-            base_img_path = '/assets/uploaded/' + datetime.now().strftime("%Y-%m-%d_%I-%M-%S_%p") + "_" + file.filename
-            uploaded_img_path = './' + sflmt_dir + base_img_path
-            img.save(uploaded_img_path)
-            query = fe.extract(img)
-            dists = np.linalg.norm(features - query, axis=1)  # Do search
-            ids = np.argsort(dists)[:search_results] # Top 30 results
-            scores = [(dists[id], img_paths[id], os.path.basename(img_paths[id])) for id in ids]
-            data = [os.path.basename(img_paths[id]) for id in ids]
-
-            return render_template('search.html',
-                                   sflmt_dir_path=(base_URL + ':' + str(main_port) + '/' + sflmt_dir + '/'),
-                                   query_path=(base_URL + ':' + str(main_port) + base_img_path),
-                                   scores=scores,
-                                   data=json.dumps(data))
+            query_size = request.form['query_size']
+            if file != None and query_size != None:
+                if int(query_size) > 0 and int(query_size) < len(img_paths):
+                    search_results = int(query_size)
+                img = Image.open(file.stream)  # PIL image
+                base_img_path = '/assets/uploaded/' + datetime.now().strftime("%Y-%m-%d_%I-%M-%S_%p") + "_" + file.filename
+                uploaded_img_path = './' + sflmt_dir + base_img_path
+                img.save(uploaded_img_path)
+                query = fe.extract(img)
+                dists = np.linalg.norm(features - query, axis=1)  # Do search
+                ids = np.argsort(dists)[:search_results] # Top 30 results
+                scores = [(dists[id], img_paths[id], os.path.basename(img_paths[id])) for id in ids]
+                data = [os.path.basename(img_paths[id]) for id in ids]
+                return render_template('search.html',
+                                       sflmt_dir_path=(base_URL + ':' + str(main_port) + '/' + sflmt_dir + '/'),
+                                       query_path=(base_URL + ':' + str(main_port) + base_img_path),
+                                       scores=scores,
+                                       data=json.dumps(data),
+                                       querysize = search_results)
         else:
-            return render_template('search.html')
+            return render_template('search.html', querysize = 15)
 
-    app.run("127.0.0.1", port = flask_port)
+    app.run(base_ip_address, port = flask_port)
+
+def announce():
+    sleep(5)
+    os.system('clear')
+    print('----------------------------------')
+    print('SFLMT server')
+    print('to access - '  + base_URL + ':8000')
+    print('----------------------------------')
 
 if __name__ == "__main__":
 
+    sendAnnounce = threading.Thread(target=announce)
+    sendAnnounce.start()
     main_server = threading.Thread(target=mainServer)
     main_server.start()
     flaskServer()
