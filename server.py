@@ -99,6 +99,8 @@ def flaskServer():
                                        scores=scores,
                                        data=json.dumps(data),
                                        querysize = search_results)
+            else:
+                return render_template('search.html', querysize = 15)
         else:
             return render_template('search.html', querysize = 15)
 
