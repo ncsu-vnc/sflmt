@@ -109,10 +109,10 @@ def flaskServer():
 def announce():
     sleep(5)
     os.system('cls' if os.name == 'nt' else 'clear')
-    print('----------------------------------')
+    print('---------------------------------------')
     print('SFLMT server')
     print('to access - '  + base_URL + ':8000')
-    print('----------------------------------')
+    print('---------------------------------------')
 
 if __name__ == "__main__":
 
