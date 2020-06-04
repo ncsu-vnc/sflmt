@@ -1427,7 +1427,7 @@ function Selection() {
   this.renderBox = true; // are we rendering the box
   this.selected = {}; // d[cellIdx] = bool indicating selected
   this.elems = {}; // collection of DOM elements
-  this.downloadFiletype = 'csv'; // filetype to use when downloading selection
+  this.downloadFiletype = 'json'; // filetype to use when downloading selection
   this.displayed = false;
   this.run = true; // if false, will disallow selection actions
 }

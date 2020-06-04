@@ -330,6 +330,137 @@ select:disabled {
 **/
 
 input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+input[type=range]::-moz-focus-outer {
+    border: 0;
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #e60100;
+  height: 18px;
+  width: 8px;
+  border-radius: 2px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -7px;
+  /* margin-top: -14px; You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;  Add cool effects to your sliders! */
+  outline: none;
+}
+
+/* All the same stuff for Firefox */
+input[type=range]::-moz-range-thumb {
+  /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+  border: 1px solid #e60100;
+  height: 16px;
+  width: 6px;
+  border-radius: 2px;
+  background: #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+  /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
+  border: 1px solid #e60100;
+  height: 18px;
+  width: 8px;
+  border-radius: 2px;
+  background: #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100px;
+  height: 4px;
+  cursor: pointer;
+  background: #ffffff;
+  border-radius: 2px;
+  border: 0.2px solid #e60100;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffffff;
+}
+
+input[type=range]::-moz-range-track {
+  width: 100px;
+  height: 3px;
+  cursor: pointer;
+  background: #ffffff;
+  border-radius: 1px;
+  border: 0.2px solid #e60100;
+}
+
+input[type=range]::-ms-track {
+  width: 100px;
+  height: 4px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #ffffff;
+  border: 0.2px solid #e60100;
+  border-radius: 2px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #ffffff;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #e60100;
+  border-radius: 2px;
+  /*box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;*/
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #ffffff;
+}
+
+#range-slider {
+  margin-right: 10px;
+  width: 100px;
+  display: inline-block;
+}
+
+#range-slider label {
+  color: #fff;
+  font-size: 9px;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+#pointsize-range-input {/*margin-top: 2px;*/}
+
+/**
+input[type=range] {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -367,7 +498,7 @@ input[type=range]::-ms-thumb {
 #pointsize-range-input {
   margin-top: 6px;
 }
-
+**/
 
 /**
 * Icons
@@ -383,7 +514,6 @@ input[type=range]::-ms-thumb {
   margin: 0 8px;
   opacity: 0.4;
   cursor: pointer;
-  vertical-align: top;
 }
 
 #icons img.active {
@@ -456,23 +586,32 @@ input[type=range]::-ms-thumb {
   flex-direction: column;
   justify-content: center;
   font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  background-image: url('../images/city_light.jpg');
+  background-size:cover;
+  opacity: 1;
+  transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s
 }
 
 #loader-scene.hidden {
-  transform: translateY(-100%);
+  transform: translateY(+100%);
+  opacity:0;
 }
 
 #loader-text {
-  /**
-	margin: 10px -50px;
-**/
-  text-align: center;
+  text-align: center;/**margin: 10px -50px;**/
+  font-size: 18px;
+  font-weight: 500;
 }
 
-.welcome {
-  max-width: 400px;
+#welcome {
+  max-width: 500px;
   margin: 0 auto;
   text-align: justify;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 @keyframes exit {
@@ -539,6 +678,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   padding: 10px 40px;
   border-style: solid;
   border-width: 2px;
+  border-color: #e60100;
   color: #fff;
   background: #e60100;
   outline: none;
