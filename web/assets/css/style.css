@@ -590,9 +590,9 @@ input[type=range]::-ms-thumb {
   background-image: url('../images/city_light.jpg');
   background-size:cover;
   opacity: 1;
-  transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -webkit-transition: all 0.5s
+  transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -webkit-transition: all 1s
 }
 
 #loader-scene.hidden {
